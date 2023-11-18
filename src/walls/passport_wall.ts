@@ -4,7 +4,14 @@ import passport from "passport";
 const defaultUserProperty = "user";
 const defaultSessionProperty = passport['_key'] || "passport";
 
-export class PassportWall extends Wall {
+/**
+ * Set property related to express framework
+ *
+ * @export
+ * @class ExpressWall
+ * @extends {Wall}
+ */
+export class ExpressWall extends Wall {
 
     async createExpressSession() {
         const session = this.session;
@@ -25,9 +32,12 @@ export class PassportWall extends Wall {
                     callback(error);
                 }
             },
-            async regenerate(callback, ccv) {
+            async regenerate(callback) {
                 await session.clear();
                 callback(null);
+            },
+            async destroy(callback) {
+                await expressSession.regenerate(callback);
             }
         }
 

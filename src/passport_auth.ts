@@ -1,4 +1,6 @@
+import { Fort } from 'fortjs';
 import passport from 'passport';
+import { ExpressWall } from './walls';
 
 export class PassportAuth {
 
@@ -13,6 +15,9 @@ export class PassportAuth {
         passport.deserializeUser(function (user, done) {
             done(null, user);
         });
+
+        // register express wall to allow setting of express property
+        Fort.walls.push(ExpressWall);
     }
 
 
