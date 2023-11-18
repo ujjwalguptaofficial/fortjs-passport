@@ -4,7 +4,7 @@ import { User } from '@/models/user';
 import { AuthenticationShield } from '@/shields/authentication_shield';
 import { auth } from 'fortjs-passport';
 
-@shields(auth.shield("session") as any)
+@shields(auth.shield("isAuthenticated"))
 // @shields(AuthenticationShield)
 export class UserController extends Controller {
 
@@ -12,10 +12,12 @@ export class UserController extends Controller {
     constructor(@singleton(UserService) service: UserService) {
         super();
         this.service = service;
+
     }
 
     @defaultWorker()
     async getUsers() {
+        console.log("user", this.data['user']);
         return jsonResult(this.service.getUsers());
     }
 
