@@ -49,7 +49,7 @@ export class ExpressWall extends Wall {
                     case "save":
                         return Reflect.get(target, p, receiver);
                 }
-                return sessionData[p];
+                return sessionData[p as string];
             },
             set(target, p, newValue, receiver) {
                 sessionData[p as string] = newValue;

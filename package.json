@@ -11,9 +11,9 @@
     },
     "displayName": "FortJs-Passport",
     "keywords": [
-        "graphql",
+        "passport",
         "fortjs",
-        "typescript",
+        "authentication",
         "node",
         "es6"
     ],
@@ -24,12 +24,14 @@
         "@types/node": "^10.12.6",
         "@types/passport": "^1.0.15",
         "fortjs": "^2.5.0",
-        "passport": "^0.6.0",
-        "ts-loader": "^5.3.0",
-        "typescript": "^3.1.6",
-        "webpack": "^4.25.1",
-        "webpack-cli": "^3.1.2",
-        "webpack-node-externals": "^1.7.2"
+        "ts-loader": "^9.4.4",
+        "typescript": "^5.1.6",
+        "webpack": "^5.88.2",
+        "webpack-cli": "^5.1.4",
+        "webpack-node-externals": "^2.5.0"
+    },
+    "dependencies": {
+        "passport": "^0.6.0"
     },
     "peerDependencies": {
         "fortjs": ">=2.5.0"

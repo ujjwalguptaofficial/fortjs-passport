@@ -1,26 +1,43 @@
 const path = require('path');
 const nodeExternals = require('webpack-node-externals');
-module.exports = {
-    entry: path.resolve(__dirname, 'index.ts'),
-    devtool: 'source-map',
+// const banner = require('./license');
+// const { BannerPlugin } = require('webpack');
+
+module.exports = [{
+    name: "fort-passport",
+    mode: process.env.NODE_ENV || 'development',
     target: "node",
-    mode: 'development',
+    entry: "./src/index.ts",
+    devtool: 'source-map',
+    output: {
+        path: path.join(__dirname, "./../dist"),
+        filename: "lib.js",
+        libraryTarget: "commonjs2"
+    },
+    optimization: {
+        // We no not want to minimize our code.
+        minimize: false,
+        nodeEnv: false
+    },
+    node: {
+        global: false,
+        __filename: false,
+        __dirname: false,
+    },
     module: {
         rules: [{
-            test: /\.tsx?$/,
-            use: 'ts-loader',
-            exclude: /node_modules/
+            test: /\.ts$/,
+            exclude: /node_modules/,
+            use: {
+                loader: 'ts-loader'
+            }
         }]
     },
     resolve: {
         extensions: ['.ts']
     },
-    output: {
-        filename: 'app.dev.js',
-        path: path.resolve(__dirname, '../build/'),
-        library: '@fortjs/graphql',
-        libraryTarget: 'commonjs2'
-    },
-    plugins: [],
+    plugins: [
+        // new BannerPlugin(banner)
+    ],
     externals: [nodeExternals()]
-};
+}];
