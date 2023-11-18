@@ -22,6 +22,9 @@ export class PassportAuth {
         });
 
         // register express wall to allow setting of express property
+        if (!Fort.walls) {
+            Fort.walls = [];
+        }
         Fort.walls.push(ExpressWall);
     }
 }

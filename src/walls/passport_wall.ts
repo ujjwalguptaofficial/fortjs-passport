@@ -1,5 +1,5 @@
 import { HttpResult, Wall, redirectResult } from "fortjs";
-import passport from "passport";
+// import passport from "passport";
 
 // const defaultUserProperty = "user";
 // const defaultSessionProperty = passport['_key'] || "passport";

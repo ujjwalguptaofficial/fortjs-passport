@@ -12,7 +12,7 @@ export function authGuard(strategyName: string | string[], options: Authenticate
             );
         }
     }
-    return PassportAuthGuard;
+    return PassportAuthGuard as any as typeof Guard;
 }
 
 
