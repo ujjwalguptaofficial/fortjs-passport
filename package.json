@@ -1,0 +1,37 @@
+{
+    "name": "fortjs-passport",
+    "version": "1.0.0",
+    "description": "Passport support for fortjs",
+    "types": "build/ts/index.d.ts",
+    "main": "build/app.dev.js",
+    "scripts": {
+        "webpack": "webpack --config src/webpack.config.js",
+        "build": "npm run webpack",
+        "build:pack": "npm run build && npm pack"
+    },
+    "displayName": "FortJs-Passport",
+    "keywords": [
+        "graphql",
+        "fortjs",
+        "typescript",
+        "node",
+        "es6"
+    ],
+    "author": "Ujjwal Gupta",
+    "license": "MIT",
+    "devDependencies": {
+        "@types/express": "^4.17.21",
+        "@types/node": "^10.12.6",
+        "@types/passport": "^1.0.15",
+        "fortjs": "^2.5.0",
+        "passport": "^0.6.0",
+        "ts-loader": "^5.3.0",
+        "typescript": "^3.1.6",
+        "webpack": "^4.25.1",
+        "webpack-cli": "^3.1.2",
+        "webpack-node-externals": "^1.7.2"
+    },
+    "peerDependencies": {
+        "fortjs": ">=2.5.0"
+    }
+}
