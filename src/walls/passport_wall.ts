@@ -16,6 +16,7 @@ export class ExpressWall extends Wall {
     async createExpressSession() {
         const session = this.session;
         const sessionData = await session.getAll();
+        console.log("sessionData", sessionData, sessionData);
         const promises = [];
         const expressSession = {
             async save(callback) {
@@ -64,13 +65,9 @@ export class ExpressWall extends Wall {
     }
 
     async onIncoming(): Promise<void | HttpResult> {
-        const wall = this;
         const expressSession = await this.createExpressSession();
         Object.assign(this.request, {
             session: expressSession,
-            get body() {
-                return wall['componentProp_'].body;
-            },
             redirect(url) {
                 return redirectResult(url);
             }

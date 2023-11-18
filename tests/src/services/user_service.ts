@@ -4,7 +4,7 @@ interface IStore {
     users: User[];
 }
 
-const store: IStore = {
+export const db: IStore = {
     users: [{
         id: 1,
         name: "Ujjwal",
@@ -17,18 +17,18 @@ const store: IStore = {
 
 export class UserService {
     getUsers() {
-        return store.users;
+        return db.users;
     }
 
     addUser(user: User) {
-        const lastUser = store.users[store.users.length - 1];
+        const lastUser = db.users[db.users.length - 1];
         user.id = lastUser == null ? 1 : lastUser.id + 1;
-        store.users.push(user);
+        db.users.push(user);
         return user;
     }
 
     updateUser(user: User) {
-        const existingUser = store.users.find(qry => qry.id === user.id);
+        const existingUser = db.users.find(qry => qry.id === user.id);
         if (existingUser != null) {
             existingUser.name = user.name;
             existingUser.address = user.address;
@@ -40,15 +40,15 @@ export class UserService {
     }
 
     getUser(id: number) {
-        return store.users.find(user => user.id === id);
+        return db.users.find(user => user.id === id);
     }
 
     removeUser(id: number) {
-        const index = store.users.findIndex(user => user.id === id);
-        store.users.splice(index, 1);
+        const index = db.users.findIndex(user => user.id === id);
+        db.users.splice(index, 1);
     }
 
     getUserByEmailAndPassword(email, password) {
-        return store.users.find(user => user.emailId === email && user.password === password);
+        return db.users.find(user => user.emailId === email && user.password === password);
     }
 }

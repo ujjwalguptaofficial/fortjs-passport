@@ -22,8 +22,9 @@ export class DefaultController extends Controller {
 
     @worker(HTTP_METHOD.Post)
     @route("/login")
-    @guards(auth.guard())
+    @guards(auth.guard('local'))
     async doLogin(@singleton(UserService) service: UserService) {
+        console.log("this.body inside doLogin", this['componentProp_'].body);
         return textResult("Logined");
         // const email = this.body.email;
         // const password = this.body.password;

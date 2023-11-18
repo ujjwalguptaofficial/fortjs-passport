@@ -2,8 +2,10 @@ import { Controller, textResult, defaultWorker, jsonResult, HTTP_STATUS_CODE, si
 import { UserService } from '@/services/user_service';
 import { User } from '@/models/user';
 import { AuthenticationShield } from '@/shields/authentication_shield';
+import { auth } from 'fortjs-passport';
 
-@shields(AuthenticationShield)
+@shields(auth.shield("session") as any)
+// @shields(AuthenticationShield)
 export class UserController extends Controller {
 
     service: UserService;
