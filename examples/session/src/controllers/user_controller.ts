@@ -4,7 +4,6 @@ import { User } from '@/models';
 import { auth } from 'fortjs-passport';
 
 @shields(auth.shield("isAuthenticated"))
-// @shields(AuthenticationShield)
 export class UserController extends Controller {
 
     service: UserService;
