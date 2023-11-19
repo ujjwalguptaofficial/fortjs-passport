@@ -23,7 +23,7 @@
         "@types/express": "^4.17.21",
         "@types/node": "^10.12.6",
         "@types/passport": "^1.0.15",
-        "fortjs": "^2.5.0",
+        "fortjs": "^2.5.1",
         "ts-loader": "^9.5.1",
         "typescript": "^5.2.2",
         "webpack": "^5.89.0",

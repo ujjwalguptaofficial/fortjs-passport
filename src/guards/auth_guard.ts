@@ -1,15 +1,17 @@
 import { Guard, HTTP_STATUS_CODE, textResult } from 'fortjs';
 import { PassportAuth } from '../passport_auth';
-import { AuthenticateOptions } from 'passport';
 import { executeMiddleWare } from '../utils';
+import { IAuthenticationOption } from '../interfaces';
 
-export function authGuard(strategyName: string | string[], options?: AuthenticateOptions) {
+export function authGuard(strategyName: string | string[], options?: IAuthenticationOption) {
     if (strategyName === "isAuthenticated") {
         return class IsAuthenticatedGuard extends Guard {
             async check() {
                 const user = this.request['user'];
                 if (user == null) {
-                    return textResult("Unauthorized", HTTP_STATUS_CODE.Unauthorized);
+                    if (user == null) {
+                        return options.getUnauthorizedResult() || textResult("Unauthorized", HTTP_STATUS_CODE.Unauthorized);
+                    }
                 }
                 this.data.user = user;
             }
