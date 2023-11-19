@@ -1,7 +1,6 @@
-import { Controller, textResult, defaultWorker, jsonResult, HTTP_STATUS_CODE, singleton, shields, validate, http, asBody } from 'fortjs';
+import { Controller, textResult, jsonResult, HTTP_STATUS_CODE, singleton, shields, validate, http, asBody } from 'fortjs';
 import { UserService } from '@/services/user_service';
-import { User } from '@/models/user';
-import { AuthenticationShield } from '@/shields/authentication_shield';
+import { User } from '@/models';
 import { auth } from 'fortjs-passport';
 
 @shields(auth.shield("isAuthenticated"))
