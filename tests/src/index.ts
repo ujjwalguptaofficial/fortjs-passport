@@ -3,6 +3,7 @@ import { Fort } from "fortjs";
 import { routes } from "@/routes";
 import { PassportAuth } from "fortjs-passport";
 import { Strategy } from 'passport-local';
+import { Strategy as JwtStrategy, ExtractJwt } from 'passport-jwt';
 import { db } from "./services/user_service";
 
 export const createApp = async () => {
@@ -22,6 +23,36 @@ export const createApp = async () => {
             const user = db.users.find(user => user.emailId === email);
             if (!user) { return done(null, false); }
             if (user.password !== password) { return done(null, false); }
+            // console.log("successfull");
+
+            return done(null, user);
+        }
+    ));
+    const opts = {} as any;
+    var jwtExtractor = function (req) {
+        var token = null;
+        if (req && req.headers.authorization) {
+            token = req.headers['authorization'];
+        }
+        // console.log("token", token);
+        return token;
+    };
+    opts.jwtFromRequest = jwtExtractor; //ExtractJwt.fromHeader('authorization');
+    opts.secretOrKey = 'thisisthesecretkey';
+    // opts.issuer = 'accounts.examplesoft.com';
+    // opts.audience = 'yoursite.net';
+    // console.log("otpions", opts.jwtFromRequest.toString());
+    PassportAuth.passport.use('jwt', new JwtStrategy(opts,
+        function (jwt_payload, done) {
+            console.log("jwt_payload", jwt_payload);
+            // console.log("userid", email, password);
+            const user = db.users.find(user => user.id === jwt_payload.id);
+            if (!user) {
+                return done(null, false, {
+                    message: 'Not authenticated'
+                });
+            }
+            // if (user.password !== password) { return done(null, false); }
             // console.log("successfull");
             return done(null, user);
         }

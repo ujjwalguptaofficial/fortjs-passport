@@ -1,4 +1,4 @@
-import { UserService } from "@/services/user_service";
+import jwt from "jsonwebtoken";
 import { Controller, viewResult, assign, worker, route, HTTP_METHOD, singleton, textResult, HTTP_STATUS_CODE, guards } from "fortjs";
 import { auth } from "fortjs-passport";
 
@@ -25,6 +25,8 @@ export class DefaultController extends Controller {
     @guards(auth.guard('local'))
     async doLogin() {
         const { user } = this.request as any;
+        const token = jwt.sign(user, 'thisisthesecretkey');
+        this.response.setHeader("authorization", token);
         return textResult(`Welcome ${user.name}`);
     }
 }
