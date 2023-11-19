@@ -18,11 +18,11 @@ export const createApp = async () => {
         passwordField: 'password'
     },
         function (email, password, done) {
-            console.log("userid", email, password);
+            // console.log("userid", email, password);
             const user = db.users.find(user => user.emailId === email);
             if (!user) { return done(null, false); }
             if (user.password !== password) { return done(null, false); }
-            console.log("successfull");
+            // console.log("successfull");
             return done(null, user);
         }
     ));

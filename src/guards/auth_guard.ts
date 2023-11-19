@@ -1,4 +1,4 @@
-import { Guard, HTTP_STATUS_CODE, textResult } from 'fortjs';
+import { Guard } from 'fortjs';
 import { PassportAuth } from '../passport_auth';
 import { executeMiddleWare, isAuthenticated } from '../utils';
 import { IAuthenticationOption } from '../interfaces';

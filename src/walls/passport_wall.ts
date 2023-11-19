@@ -14,16 +14,9 @@ export class ExpressWall extends Wall {
     async createExpressSession() {
         const session = this.session;
         const sessionData = await session.getAll();
-        console.log("sessionData", sessionData, sessionData);
         const promises = [];
         const expressSession = {
             async save(callback) {
-                console.log("save called", sessionData);
-                // for (const key in sessionData) {
-                //     promises.push(
-                //         session.set(key, sessionData[key])
-                //     );
-                // }
                 try {
                     await Promise.all(promises);
                     callback(null);
@@ -42,7 +35,6 @@ export class ExpressWall extends Wall {
 
         return new Proxy(expressSession, {
             get(target, p, receiver) {
-                console.log("get session p", p, receiver)
                 switch (p) {
                     case "regenerate":
                     case "save":
@@ -52,11 +44,9 @@ export class ExpressWall extends Wall {
             },
             set(target, p, newValue, receiver) {
                 sessionData[p as string] = newValue;
-                console.log("set session p", p);
                 promises.push(
                     session.set(p as string, newValue)
                 );
-                // session.set(p as string, newValue);
                 return true;
             }
         });
