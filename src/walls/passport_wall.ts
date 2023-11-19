@@ -1,9 +1,6 @@
-import { HttpResult, Wall, redirectResult } from "fortjs";
+import { IHttpResult, Wall, redirectResult } from "fortjs";
 import passport from "passport";
 import { executeMiddleWare } from "../utils";
-
-// const defaultUserProperty = "user";
-// const defaultSessionProperty = passport['_key'] || "passport";
 
 /**
  * Set property related to express framework
@@ -65,7 +62,7 @@ export class ExpressWall extends Wall {
         });
     }
 
-    async onIncoming(): Promise<void | HttpResult> {
+    async onIncoming(): Promise<void | IHttpResult> {
         const expressSession = await this.createExpressSession();
         Object.assign(this.request, {
             session: expressSession,
@@ -73,6 +70,6 @@ export class ExpressWall extends Wall {
                 return redirectResult(url);
             }
         });
-        executeMiddleWare.call(this, passport.session());
+        await executeMiddleWare.call(this, passport.session());
     }
 }

@@ -23,18 +23,8 @@ export class DefaultController extends Controller {
     @worker(HTTP_METHOD.Post)
     @route("/login")
     @guards(auth.guard('local'))
-    async doLogin(@singleton(UserService) service: UserService) {
-        console.log("this.body inside doLogin", this['componentProp_'].body);
-        return textResult("Logined");
-        // const email = this.body.email;
-        // const password = this.body.password;
-        // const userFromService = service.getUserByEmailAndPassword(email, password);
-        // if (userFromService != null) {
-        //     this.session.set('email', email);
-        //     return textResult(`Welcome ${userFromService.name}`);
-        // }
-        // else {
-        //     return textResult("invalid Login Data", HTTP_STATUS_CODE.BadRequest);
-        // }
+    async doLogin() {
+        const { user } = this.request as any;
+        return textResult(`Welcome ${user.name}`);
     }
 }

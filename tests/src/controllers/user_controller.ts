@@ -17,7 +17,6 @@ export class UserController extends Controller {
 
     @defaultWorker()
     async getUsers() {
-        console.log("user", this.data['user']);
         return jsonResult(this.service.getUsers());
     }
 
