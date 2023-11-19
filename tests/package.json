@@ -14,7 +14,8 @@
     "test:unit": "cross-env NODE_ENV=test jest --config jest.config.specs.js --runInBand",
     "test:e2e": "npm run build && cross-env NODE_ENV=test jest --config jest.config.e2e.js --runInBand",
     "test": "npm run test:unit && npm run test:e2e",
-    "install:passport": "npm i ../fortjs-passport-1.0.0.tgz"
+    "install:passport": "npm i ../fortjs-passport-1.0.0.tgz",
+    "install:lib:test": "node install_lib.js && npm run test"
   },
   "repository": {
     "type": "git",

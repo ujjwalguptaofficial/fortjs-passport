@@ -7,7 +7,9 @@
     "scripts": {
         "webpack": "webpack --config src/webpack.config.js",
         "build": "npm run webpack",
-        "build:pack": "npm run build && npm pack"
+        "build:pack": "npm run build && npm pack",
+        "test": "cd tests && npm run install:lib:test",
+        "build:test": "npm run build:pack && npm run test"
     },
     "displayName": "FortJs-Passport",
     "keywords": [

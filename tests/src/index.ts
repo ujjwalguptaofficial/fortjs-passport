@@ -44,7 +44,7 @@ export const createApp = async () => {
     // console.log("otpions", opts.jwtFromRequest.toString());
     PassportAuth.passport.use('jwt', new JwtStrategy(opts,
         function (jwt_payload, done) {
-            console.log("jwt_payload", jwt_payload);
+            // console.log("jwt_payload", jwt_payload);
             // console.log("userid", email, password);
             const user = db.users.find(user => user.id === jwt_payload.id);
             if (!user) {
