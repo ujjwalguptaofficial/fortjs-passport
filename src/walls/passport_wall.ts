@@ -1,4 +1,4 @@
-import { IHttpResult, Wall, redirectResult } from "fortjs";
+import { Fort, IHttpResult, Wall, redirectResult } from "fortjs";
 import passport from "passport";
 import { executeMiddleWare } from "../utils";
 
@@ -60,6 +60,8 @@ export class ExpressWall extends Wall {
                 return redirectResult(url);
             }
         });
-        await executeMiddleWare.call(this, passport.session());
+        if (this['componentProp_'].global.shouldParseCookie) {
+            await executeMiddleWare.call(this, passport.session());
+        }
     }
 }
